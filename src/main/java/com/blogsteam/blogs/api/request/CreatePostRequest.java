@@ -17,4 +17,6 @@ public class CreatePostRequest {
     public String getPostContents() {
         return postContents;
     }
+
+
 }
