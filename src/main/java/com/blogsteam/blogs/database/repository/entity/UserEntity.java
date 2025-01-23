@@ -1,9 +1,9 @@
 package com.blogsteam.blogs.database.repository.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +14,8 @@ public class UserEntity {
     private String name;
     private String email;
     private String password;
+    @OneToMany(mappedBy = "user")
+    private List<PostEntity> posts = new ArrayList<>();
 
     public UserEntity(){}
 
@@ -32,10 +34,6 @@ public class UserEntity {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -61,4 +59,6 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<PostEntity> getPosts() { return posts; }
 }

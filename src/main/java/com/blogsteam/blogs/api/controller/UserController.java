@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "{apiPrefix}/users")
+@RequestMapping(path = "/users")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
