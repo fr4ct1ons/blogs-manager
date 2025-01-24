@@ -1,4 +1,4 @@
-﻿package com.blogsteam.blogs.api.request;
+package com.blogsteam.blogs.api.request;
 
 public class UpdateCommentRequest {
     private String newContents;
