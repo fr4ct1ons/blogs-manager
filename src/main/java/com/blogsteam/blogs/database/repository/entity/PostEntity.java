@@ -3,6 +3,9 @@ package com.blogsteam.blogs.database.repository.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "posts")
 public class PostEntity {
@@ -18,6 +21,9 @@ public class PostEntity {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private UserEntity user;
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    private List<CommentEntity> comments = new ArrayList<>();
 
     public PostEntity() {}
 
@@ -50,4 +56,6 @@ public class PostEntity {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public List<CommentEntity> getComments() { return comments; }
 }

@@ -2,6 +2,7 @@ package com.blogsteam.blogs.api.controller;
 
 import com.blogsteam.blogs.api.request.CreatePostRequest;
 import com.blogsteam.blogs.api.request.EditPostRequest;
+import com.blogsteam.blogs.database.repository.CommentRepository;
 import com.blogsteam.blogs.database.repository.PostRepository;
 import com.blogsteam.blogs.database.repository.UserRepository;
 import com.blogsteam.blogs.database.repository.entity.PostEntity;
@@ -17,6 +18,9 @@ public class PostController {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @PostMapping(path = "createPost")
     public ResponseEntity CreatePost(@RequestBody CreatePostRequest request){
@@ -67,6 +71,11 @@ public class PostController {
         }
         var post = optionalPost.get();
 
+        var list = post.getComments();
+        for (int i = 0; i < list.size(); i++) {
+            var comment = list.get(i);
+            commentRepository.delete(comment);
+        }
         postRepository.delete(post);
 
         return ResponseEntity.noContent().build();
